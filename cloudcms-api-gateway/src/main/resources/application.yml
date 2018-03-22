@@ -20,6 +20,9 @@ zuul:
     api-a:
       path: /api-web-ui/**
       serviceId: cloud-web-ui-service
+    auth-api:
+      path: /auth-server/**
+      serviceId: Cloudcms-Auth-Server
 management:
   security:
     enabled: false
