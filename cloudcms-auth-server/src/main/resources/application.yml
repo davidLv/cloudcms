@@ -1,0 +1,47 @@
+server:
+  port: 9003
+
+spring:
+  application:
+    name: Cloudcms-Auth-Server
+  datasource:
+    dbcp2:
+      max-wait-millis: 10000
+      min-idle: 5
+      initial-size: 5
+      validation-query: SELECT 1
+    url: jdbc:mysql://localhost:3306/jeecmsv8?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: admin
+    type: org.apache.commons.dbcp2.BasicDataSource
+
+mybatis:
+  mapper-locations: classpath:com/cloudcms/authserver/mapper/*Mapper.xml
+  #type-aliases-package: com.cloudcms.authserver.bean
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9001/eureka/
+
+logging:
+  level:
+    org:
+      springframework: debug
+    org:
+      mybatis: debug
+management:
+  security:
+    enabled: false
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+#security:
+#  oauth2:
+#    client:
+#      client-id: android
+#      client-secret: secret
+#      grant-type: authorization_code
+

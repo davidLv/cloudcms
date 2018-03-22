@@ -1,0 +1,139 @@
+client_credentials mode:
+    client模式，没有用户的概念，直接与认证服务器交互，用配置中的客户端信息去申请accessToken，客户端有自己的client_id,client_secret对应于用户的username,password，而客户端也拥有自己的authorities，当采取client模式认证时，对应的权限也就是客户端自己的authorities。
+    url: http://localhost:9003/oauth/token
+    Request Headers:
+        content-type:"application/x-www-form-urlencoded"
+        cache-control:"no-cache"
+        postman-token:"fdafcf27-72d2-4190-8538-894c89bb3f1e"
+        user-agent:"PostmanRuntime/7.1.1"
+        accept:"*/*"
+        host:"localhost:9003"
+        cookie:"JSESSIONID=940E6F533A9F17CB08E9DFC665EFA16E"
+        accept-encoding:"gzip, deflate"
+        content-length:68
+    Request Body:
+        grant_type:"client_credentials"
+        client_id:"android"
+        client_secret:"secret"
+    Response Headers:
+        cache-control:"no-store"
+        pragma:"no-cache"
+        x-content-type-options:"nosniff"
+        x-xss-protection:"1; mode=block"
+        x-frame-options:"DENY"
+        content-type:"application/json;charset=UTF-8"
+        transfer-encoding:"chunked"
+        date:"Thu, 22 Mar 2018 05:56:19 GMT"
+    Response Body:
+        access_token:"787b2d50-0755-482a-ba17-60e74dc1fe39"
+        token_type:"bearer"
+        expires_in:43199
+        scope:"read write"
+        {
+            "access_token": "787b2d50-0755-482a-ba17-60e74dc1fe39",
+            "token_type": "bearer",
+            "expires_in": 43199,
+            "scope": "read write"
+        }
+
+
+
+password mode:
+    password模式，自己本身有一套用户体系，在认证时需要带上自己的用户名和密码，以及客户端的client_id,client_secret。此时，accessToken所包含的权限是用户本身的权限，而不是客户端的权限。
+    url: http://localhost:9003/oauth/token
+    Request Headers:
+        content-type:"application/x-www-form-urlencoded"
+        cache-control:"no-cache"
+        postman-token:"37fb004f-f177-40c6-9aec-cc46755dc74e"
+        user-agent:"PostmanRuntime/7.1.1"
+        accept:"*/*"
+        host:"localhost:9003"
+        cookie:"JSESSIONID=940E6F533A9F17CB08E9DFC665EFA16E"
+        accept-encoding:"gzip, deflate"
+        content-length:99
+    Request Body:
+        grant_type:"password"
+        username:"admin"
+        password:"admin"
+        client_id:"android"
+        client_secret:"secret"
+        scope:"read"
+    Response Headers:
+        cache-control:"no-store"
+        pragma:"no-cache"
+        x-content-type-options:"nosniff"
+        x-xss-protection:"1; mode=block"
+        x-frame-options:"DENY"
+        content-type:"application/json;charset=UTF-8"
+        transfer-encoding:"chunked"
+        date:"Thu, 22 Mar 2018 05:54:45 GMT"
+    Response Body:
+        access_token:"624aa192-6fe9-47e5-8163-c6020ccbebfe"
+        token_type:"bearer"
+        refresh_token:"967d5ab2-f1e4-44b4-924e-84a093906f74"
+        expires_in:42914
+        scope:"read"
+        {
+            "access_token": "624aa192-6fe9-47e5-8163-c6020ccbebfe",
+            "token_type": "bearer",
+            "refresh_token": "967d5ab2-f1e4-44b4-924e-84a093906f74",
+            "expires_in": 42914,
+            "scope": "read"
+        }
+
+
+
+authorization_code mode
+    auth_url : http://localhost:9003/oauth/authorize
+    Grant Type : Authorization Code
+    Callback URL : http://localhost:9003
+    Auth URL : http://localhost:9003/oauth/authorize
+    Access Token URL : http://localhost:9003/oauth/token
+    Client ID : android
+    Client Secret: secret
+    Scope : read
+
+    Request Headers:
+        content-type:"application/x-www-form-urlencoded"
+        user-agent:"PostmanRuntime/7.1.1"
+        accept:"*/*"
+        host:"localhost:9003"
+        accept-encoding:"gzip, deflate"
+        content-length:123
+    Request Body:
+        grant_type:"authorization_code"
+        code:"9N7joI"
+        redirect_uri:"http://localhost:9003"
+        client_id:"android"
+        client_secret:"secret"
+    Response Headers:
+        cache-control:"no-store"
+        pragma:"no-cache"
+        x-content-type-options:"nosniff"
+        x-xss-protection:"1; mode=block"
+        x-frame-options:"DENY"
+        content-type:"application/json;charset=UTF-8"
+        transfer-encoding:"chunked"
+        date:"Thu, 22 Mar 2018 06:12:57 GMT"
+    Response Body:
+        access_token:"624aa192-6fe9-47e5-8163-c6020ccbebfe"
+        token_type:"bearer"
+        refresh_token:"967d5ab2-f1e4-44b4-924e-84a093906f74"
+        expires_in:41821
+        scope:"read"
+
+
+implicit mode:
+    Grant Type : Implicit
+    Callback URL : http://localhost:9003
+    Auth URL : http://localhost:9003/oauth/authorize
+    Client ID : android
+    Client Secret : secret
+    Scope : read
+    State : State
+    Client Authentication : send client credentials in body
+
+    Access Token : 624aa192-6fe9-47e5-8163-c6020ccbebfe
+    token_type : bearer
+    state :
+    expires_in : 41372

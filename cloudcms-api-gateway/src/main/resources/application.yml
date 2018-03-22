@@ -1,0 +1,30 @@
+server:
+  port: 5555
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    config:
+      uri: http://localhost:${config.port:9000}
+      name: cloud-config
+      profile: dev
+  session:
+    store-type: hash_map
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9001/eureka/
+zuul:
+  routes:
+    api-a:
+      path: /api-web-ui/**
+      serviceId: cloud-web-ui-service
+management:
+  security:
+    enabled: false
+security:
+  basic:
+    enabled: false
+
+

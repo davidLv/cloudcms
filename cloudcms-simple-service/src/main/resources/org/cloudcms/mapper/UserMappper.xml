@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cloudcms.dao.UserDao">
+    <resultMap type="org.cloudcms.bean.User" id="userMap">
+        <id property="userId" column="user_id"/>
+        <result property="username" column="username"/>
+        <result property="email" column="email"/>
+        <result property="password" column="password"/>
+        <result property="registerTime" column="register_time"/>
+        <result property="registerIp" column="register_ip"/>
+        <result property="lastLoginTime" column="last_login_time"/>
+        <result property="lastLoginIp" column="last_login_ip"/>
+        <result property="loginCount" column="login_count"/>
+        <result property="resetKey" column="reset_key"/>
+        <result property="resetPwd" column="reset_pwd"/>
+        <result property="errorTime" column="error_time"/>
+        <result property="errorIp" column="error_ip"/>
+        <result property="activation" column="activation"/>
+        <result property="activitionCode" column="activition_code"/>
+    </resultMap>
+</mapper>
