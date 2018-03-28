@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: Cloudcms-Auth-Server
+    name: auth-server
   datasource:
     dbcp2:
       max-wait-millis: 10000

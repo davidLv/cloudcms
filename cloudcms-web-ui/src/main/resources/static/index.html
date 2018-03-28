@@ -41,12 +41,20 @@
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
+		<script src="assets/js/vue-nonbuild/vue.js"></script>
+		<script src="assets/js/vue-nonbuild/vue-resource/vue-resource.js"></script>
+		<script src="assets/js/underscore.js"></script>
+		<script type="text/javascript">
+			var token = localStorage.hasOwnProperty('access_token') ? localStorage.getItem('access_token') : '';
 
-		<script src="assets/js/vue/vue.js"></script>
+			if (_.isEmpty(token)) {
+				window.location.href = 'login.html';
+			}
+		</script>
 	</head>
 
 	<body class="no-skin">
-		<div id="navbar" class="navbar navbar-default ace-save-state">
+		<div id="navbar" class="navbar navbar-default          ace-save-state">
 			<div class="navbar-container ace-save-state" id="navbar-container">
 				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
 					<span class="sr-only">Toggle sidebar</span>

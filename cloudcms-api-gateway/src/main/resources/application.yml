@@ -1,5 +1,5 @@
 server:
-  port: 5555
+  port: 8080
 
 spring:
   application:
@@ -18,11 +18,11 @@ eureka:
 zuul:
   routes:
     api-a:
-      path: /api-web-ui/**
-      serviceId: cloud-web-ui-service
+      path: /web/**
+      serviceId: web-ui
     auth-api:
       path: /auth-server/**
-      serviceId: Cloudcms-Auth-Server
+      serviceId: auth-server
 management:
   security:
     enabled: false
