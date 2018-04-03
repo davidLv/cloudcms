@@ -54,7 +54,7 @@
 	</head>
 
 	<body class="no-skin">
-		<div id="navbar" class="navbar navbar-default          ace-save-state">
+		<div id="navbar" class="navbar navbar-default ace-save-state">
 			<div class="navbar-container ace-save-state" id="navbar-container">
 				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
 					<span class="sr-only">Toggle sidebar</span>
@@ -361,7 +361,7 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="#">
+									<a href="#" v-on:click="logout">
 										<i class="ace-icon fa fa-power-off"></i>
 										Logout
 									</a>
@@ -2403,6 +2403,73 @@
 				});
 			
 			})
+		</script>
+		<script src="assets/js/vue-nonbuild/vue.js"></script>
+		<script src="assets/js/vue-nonbuild/vue-resource/vue-resource.js"></script>
+		<script src="assets/js/underscore.js"></script>
+		<script type="text/javascript">
+            Vue.use(VueResource);
+
+            var app = new Vue({
+                el: '#navbar',
+                data: {
+                    res: '',
+                    apiUrl: '../auth-server/oauth/check_token'
+                },
+				beforeCreate: function() {
+                    this.$nextTick(function() {
+                        this.checkLogin()
+					})
+				},
+				/*mounted: function(){
+					this.$nextTick(function() {
+					    this.checkLogin()
+					})
+				},*/
+                methods: {
+                    logout : function() {
+                        localStorage.clear();
+                        window.location.href = './login.html';
+					},
+					checkLogin : function() {
+                        var vueObj = this;
+                        var params = {
+                            token : localStorage.getItem('access_token')
+						}
+						vueObj.$http.get(vueObj.apiUrl, {params : params}, {emulateJSON: true})
+							.then( (response) => {
+								alert(JSON.stringify(response.body));
+							})
+							.catch( (response) => {
+							    alert(JSON.stringify(response.body));
+							    if (response.body.error === 'invalid_token') {
+                                    window.location.href = 'login.html';
+								}
+							});
+					}
+                    /*login : function() {
+                        var vueObj = this;
+                        var postData = {
+                            grant_type : 'password',
+                            username : 'admin',
+                            password : 'admin',
+                            client_id : 'webapp'
+                        };
+                        vueObj.$http.post(vueObj.apiUrl, postData, {emulateJSON: true})
+                            .then((response) => {
+                                vueObj.res = response.body;
+                                alert(JSON.stringify(response.body));
+                                localStorage.setItem('access_token', response.body.access_token);
+                                localStorage.setItem('refresh_token', response.body.refresh_token);
+                                window.location.href = 'index.html';
+                            });
+                    }*/
+                }
+            })
+
+            /*function login() {
+                alert('login');
+            }*/
 		</script>
 	</body>
 </html>
