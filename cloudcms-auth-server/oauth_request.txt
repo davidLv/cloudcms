@@ -137,3 +137,52 @@ implicit mode:
     token_type : bearer
     state :
     expires_in : 41372
+
+
+
+
+
+check token valid:
+    Get : http://localhost:9003/oauth/check_token?token=d5a8c958-1fc6-4e49-b312-b1384c14d9f5
+    Response: {
+                  "error": "invalid_token",
+                  "error_description": "Token was not recognised"
+              }
+
+refresh access token:
+    Request Headers:
+        content-type:"application/x-www-form-urlencoded"
+        cache-control:"no-cache"
+        postman-token:"09dd7501-6d00-43c8-b404-946e97507ed0"
+        user-agent:"PostmanRuntime/7.1.1"
+        accept:"*/*"
+        host:"localhost:8080"
+        cookie:"JSESSIONID=CF0946E68946EEA4ED30EE5C7EF1D0F3"
+        accept-encoding:"gzip, deflate"
+        content-length:137
+    Request Body:
+        grant_type:"refresh_token"
+        refresh_token:"939c7d0c-9e73-4874-9810-fda0f53737a3"
+        access_token:"d5a8c958-1fc6-4e49-b312-b1384c14d9f5"
+        username:"admin"
+        password:"admin"
+        client_id:"webapp"
+        client_secret:""
+    Response Headers:
+        x-content-type-options:"nosniff"
+        x-xss-protection:"1; mode=block"
+        cache-control:"no-cache, no-store, max-age=0, must-revalidate"
+        pragma:"no-cache"
+        expires:"0"
+        x-frame-options:"DENY"
+        x-application-context:"api-gateway:8080"
+        date:"Tue, 03 Apr 2018 08:12:28 GMT"
+        set-cookie:"JSESSIONID=71F6463CD1BEAB81C19601926676DDAB; Path=/; HttpOnly"
+        content-type:"application/json;charset=UTF-8"
+        transfer-encoding:"chunked"
+    Response Body:
+        access_token:"6b605bb6-dfe5-41ad-a1fc-052e26b49dae"
+        token_type:"bearer"
+        refresh_token:"939c7d0c-9e73-4874-9810-fda0f53737a3"
+        expires_in:43199
+        scope:"read"

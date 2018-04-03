@@ -38,6 +38,8 @@ security:
   oauth2:
     resource:
       filter-order: 3
+    #authorization:
+      #check-token-access: permitAll()
 #security:
 #  oauth2:
 #    client:

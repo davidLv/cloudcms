@@ -67,12 +67,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        //security.checkTokenAccess("permitAll()");
         //security.passwordEncoder(new MD5PasswordEncoder());
         //for client mode, if there is no password encoder to encode the secret then using NoPasswordEncoder
         security.passwordEncoder(new NoPasswordEncoder());
         security.realm(REALM+"/client");
         security.tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticated()")
+                //.checkTokenAccess("isAuthenticated()")
+                //设置客户端可以通过/oauth/check_token?token=xxxxxxxxx来检查token有效性
+                .checkTokenAccess("permitAll()")
                 .allowFormAuthenticationForClients();
         //security.passwordEncoder(passwordEncoder());
         //security.tokenKeyAccess("isAnonymous()").checkTokenAccess("isAnonymous()").allowFormAuthenticationForClients();
