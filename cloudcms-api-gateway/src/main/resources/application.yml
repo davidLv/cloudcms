@@ -69,10 +69,7 @@ logging:
 #  cors:
 #    allowed-headers: '*'
 
-
-
-
-
-
-
-
+#adding below to resolve the ZuulException 500 General error
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
