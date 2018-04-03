@@ -1,6 +1,6 @@
 package org.cloudcms.bean;
 
-import javax.persistence.Entity;
+//import javax.persistence.Entity;
 import java.sql.Date;
 
 //@Entity

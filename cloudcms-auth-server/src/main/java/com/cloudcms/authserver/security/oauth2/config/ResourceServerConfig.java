@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHand
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableResourceServer
@@ -23,13 +24,22 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.
+        http
+                .csrf().disable()
+                .exceptionHandling()
+                .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+                .and()
+                .authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic();
+        /*http.
                 anonymous().disable()
                 .requestMatchers().antMatchers("/user/**")
                 .and().authorizeRequests()
                 .antMatchers("/user/**").hasAuthority("rest:access")
                 //.antMatchers("/user/**").access("hasRole('ADMIN')")
-                .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
+                .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());*/
         /*http.csrf().disable()
                 .httpBasic().disable()
                 .authorizeRequests()

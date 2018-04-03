@@ -1,5 +1,6 @@
 server:
   port: 8080
+  use-forward-headers: true
 
 spring:
   application:
@@ -11,11 +12,16 @@ spring:
       profile: dev
   session:
     store-type: hash_map
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:9001/eureka/
+
 zuul:
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 60000
   routes:
     api-a:
       path: /web/**
@@ -23,11 +29,50 @@ zuul:
     auth-api:
       path: /auth-server/**
       serviceId: auth-server
+    simple-api:
+      path: /simple/**
+      serviceId: cloud-simple-service
+  add-host-header: true
+  ribbon-isolation-strategy: thread
+  #add-proxy-headers: true
+  #the sensitive-headers usage to control whether to filter the sensitive-headers like cookie, Authortication
+  sensitive-headers:
+  #ignore-security-headers: false
+
+
 management:
   security:
     enabled: false
+
 security:
   basic:
     enabled: false
+  oauth2:
+    client:
+      access-token-uri: http://localhost:8080/auth-server/oauth/token
+      user-authorization-uri: http://localhost:8080/auth-server/oauth/authorize
+      client-id: webapp
+    resource:
+      user-info-uri: http://localhost:8080/auth-server/user
+      prefer-token-info: false
+      #id: cloud-simple-service
+hystrix:
+    command:
+        default:
+            execution:
+                isolation:
+                    thread:
+                        timeoutInMilliseconds: 60000
+logging:
+  level: debug
+#endpoints:
+#  cors:
+#    allowed-headers: '*'
+
+
+
+
+
+
 
 
